@@ -1,45 +1,232 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html>
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="./index.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>itsacg - 首页</title>
+    <title>漫画中心</title>
+    <link rel="stylesheet" type="text/css" href="./css/style_1_common.css">
     <style>
-        body {
-            background-color: #f5f5f5;
-            text-align: center;
-            padding-top: 100px;
-            line-height: 2;
-            font-size: 1.2em;
-        }
-
-        a {
-            color: black;
-            font: bold;
-            z-index: 2;
-        }
-
-        .gay {
-            color: rgba(0, 0, 0, 0.5);
-            font-size: 0.8em;
+        .toolbar,
+        .findbar,
+        .download,
+        .print {
+            display: block !important;
+            visibility: visible !important;
         }
     </style>
-
 </head>
 
-<body>
-    <!-- <h1 style="color: #00000004; font-size: 5em; bottom: 0; position: absolute; z-index: 1;">初一3班 猛虎下山 一半进厂 一半大专</h1> -->
-    <h1>欢迎来到 itsacg</h1>
-    <p class="gay">91VIP被一班捷足先登了: )</p>
-    <!-- <a href="./孙嘉辰.html">访问孙嘉辰的页面</a> -->
-    <!-- <br> -->
-    <a href="./刘睿涵.html">访问刘睿涵的页面</a>
-    <br>
-    <a href="./0.html">访问 的页面</a>
-    <br>
-    <a href="https://www.91vip.qzz.io/" target="_blank" style="color: #000000;">友情链接：91VIP</a>
+<body id="nv_plugin" class="pg_jameson_manhua" onkeydown="if(event.keyCode==27) return false;">
+    <div id="append_parent">
+        <div id="ls_fastloginfield_ctrl_menu" class="sltm" style="display: none; width: 40px;">
+            <ul>
+                <li class="current">用戶名</li>
+                <li>Email</li>
+            </ul>
+        </div>
+    </div>
+    <div id="ajaxwaitid"></div>
+    <div id="toptb" class="cl">
+        <div class="wp">
+            <div class="z"><a href="javascript:;">设为首页</a><a
+                    onclick="addFavorite(this.href, &#39; 紳士泛漫畫,全網最新最全的線上,同人誌,雜誌單篇,單行本&#39;);return false;">收藏本站</a>
+            </div>
+            <div class="y">
+                <a id="switchblind" href="javascript:;" onclick="toggleBlind(this)" title="開啟輔助訪問"
+                    class="switchblind"></a>
+                <a href="javascript:;" id="switchwidth" onclick="widthauto(this)" title="切換到寬版"
+                    class="switchwidth">切換到寬版</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="qmenu_menu" class="p_pop blk" style="display: none;">
+        <div class="ptm pbw hm">
+            請 <a href="javascript:;" class="xi2" onclick="lsSubmit()"><strong>登錄</strong></a> 後使用快捷導航<br>沒有賬號？<a
+                class="xi2 xw1">立即注册</a>
+        </div>
+        <div id="fjump_menu" class="btda"></div>
+    </div>
+    <div id="hd">
+        <div class="wp">
+            <div class="hdc cl">
+                <h2><a title=" 紳士泛漫畫,全網最新最全的線上,同人誌,雜誌單篇,單行本"><img src="./logo.svg" alt=" 紳士泛漫畫,全網最新最全的線上,同人誌,雜誌單篇,單行本"
+                            class="boardlogo" id="boardlogo" border="0"></a></h2>
+                <form method="post" autocomplete="off" id="lsform" onsubmit="return lsSubmit();">
+                    <div class="fastlg cl">
+                        <span id="return_ls" style="display:none"></span>
+                        <div class="y pns">
+                            <table cellspacing="0" cellpadding="0">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <span class="ftid">
+                                                <select name="fastloginfield" id="ls_fastloginfield" width="40"
+                                                    selecti="0" style="display: none;">
+
+
+                                                    <option value="username"></option>
+                                                </select><a href="javascript:;" id="ls_fastloginfield_ctrl"
+                                                    style="width:40px">用戶名</a>
+                                            </span>
+                                        </td>
+                                        <td><input type="text" name="username" id="ls_username" autocomplete="off"
+                                                class="px vm"></td>
+                                        <td class="fastlg_l"><label for="ls_cookietime"><input type="checkbox"
+                                                    name="cookietime" id="ls_cookietime" class="pc"
+                                                    value="2592000">自動登錄</label></td>
+                                        <td>&nbsp;<a href="javascript:;"
+                                                onclick="showWindow(&#39;login&#39;, &#39;member.php?mod=logging&amp;action=login&amp;viewlostpw=1&#39;)">找回密碼</a>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td><label for="ls_password" class="z psw_w">密碼</label></td>
+                                        <td><input type="password" name="password" id="ls_password" class="px vm"
+                                                autocomplete="off"></td>
+                                        <td class="fastlg_l"><button type="submit" class="pn vm"
+                                                style="width: 75px;"><em>登錄</em></button></td>
+                                        <td>&nbsp;<a class="xi2 xw1">立即注册</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <input type="hidden" name="formhash" value="d2448b15">
+                            <input type="hidden" name="quickforward" value="yes">
+                            <input type="hidden" name="handlekey" value="ls">
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div id="nv">
+                <a href="javascript:;" id="qmenu"
+                    onmouseover="delayShow(this, function () {showMenu({&#39;ctrlid&#39;:&#39;qmenu&#39;,&#39;pos&#39;:&#39;34!&#39;,&#39;ctrlclass&#39;:&#39;a&#39;,&#39;duration&#39;:2});showForummenu(0);})">快捷導航</a>
+                <ul>
+                    <li><a href="https://www.itsacg.qzz.io/" hidefocus="true" style="color: orange">首頁</a>
+                    </li>
+                    <li><a href="./刘睿涵.html" hidefocus="true">劉睿涵</a></li>
+                    <li><a href="./0.html" hidefocus="true">郭 子墨</a></li>
+                    <li><a href="https://www.91vip.qzz.io" hidefocus="true">友情链接：91VIP</a></li>
+                    <li><a href="./發佈頁.html" hidefocus="true" style="color: orange">站點發布頁</a>
+                    <li><a href="./old.html" hidefocus="true" style="color: orange">旧页面</a>
+                    </li>
+                </ul>
+            </div>
+            <div id="mu" class="cl">
+            </div>
+            <div id="scbar" class="cl">
+                <form id="scbar_form" method="post" autocomplete="off" onsubmit="searchFocus($(&#39;scbar_txt&#39;))"
+                    target="_blank">
+                    <input type="hidden" name="mod" id="scbar_mod" value="forum">
+                    <input type="hidden" name="formhash" value="d2448b15">
+                    <input type="hidden" name="srchtype" value="title">
+                    <input type="hidden" name="srhfid" value="0">
+                    <input type="hidden" name="srhlocality" value="plugin::jameson_manhua">
+                    <table cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr>
+                                <td class="scbar_icon_td"></td>
+                                <td class="scbar_txt_td"><input type="text" name="srchtxt" id="scbar_txt"
+                                        value="請輸入搜索內容" autocomplete="off" x-webkit-speech="" speech="" class=" xg1"
+                                        placeholder="請輸入搜索內容"></td>
+                                <td class="scbar_type_td"><a href="javascript:;" id="scbar_type" class="xg1 showmenu"
+                                        onclick="showMenu(this.id)" hidefocus="true">帖子</a></td>
+                                <td class="scbar_btn_td"><button type="submit" name="searchsubmit" id="scbar_btn" sc="1"
+                                        class="pn pnc" value="true"><strong class="xi2">搜索</strong></button></td>
+                                <td class="scbar_hot_td">
+                                    <div id="scbar_hot">
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+            <ul id="scbar_type_menu" class="p_pop" style="display: none;">
+                <li><a href="javascript:;" rel="forum" class="curtype">帖子</a></li>
+            </ul>
+            <script type="text/javascript">
+                initSearchmenu('scbar', '');
+            </script>
+        </div>
+    </div>
+
+
+    <div id="wp" class="wp">
+        <meta name="juicyads-site-verification" content="f926d94ea362fb0b33406971c85a0d02">
+        <meta name="Trafficstars" content="70085">
+        <link rel="stylesheet" type="text/css" href="./css/uikit.css">
+        <link rel="stylesheet" type="text/css" href="./css/custom.css">
+        <script type="text/javascript">
+            var xfmh = jQuery.noConflict(true);
+            (window.jQuery && jQuery().jquery > '2.0.0') || (window.jQuery = xfmh);
+        </script>
+        <div class="jameson_manhua mt5 mbm  largewidth" id="jameson_manhua">
+            <nav class="uk-navbar-container sp-nav uk-navbar-transparent uk-navbar" uk-navbar="">
+                <!-- 左侧首页文字 -->
+                <div class="nav-overlay uk-navbar-left">
+                    <div>
+                        <form class="uk-search uk-search-navbar">
+                            <input type="hidden" name="id" value="jameson_manhua">
+                            <input type="hidden" name="a" value="search">
+                            <input type="hidden" name="c" value="index">
+                            <input name="keyword" class="uk-search-input xs2"
+                                style="height: 35px;border:1px solid #ccc;margin: 5px;" type="search"
+                                placeholder="搜索漫画">
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <!-- 下面是按照大分类列出来的 -->
+        <div class="rootcate uk-margin-top uk-padding-small uk-border-dedeef pt0">
+            <div class="rootcate-nav ">
+                <div class="rootcate-title">
+                    <a class="" href="./刘睿涵.html" style="font-size: 24px;font-weight: normal;">劉睿涵</a>
+                </div>
+            </div>
+            <iframe src="./刘睿涵.html" frameborder="0" width="100%" height="700px"></iframe>
+        </div>
+        <div class="rootcate uk-margin-top uk-padding-small uk-border-dedeef pt0">
+            <div class="rootcate-nav ">
+                <div class="rootcate-title">
+                    <a class="" href="./0.html" style="font-size: 24px;font-weight: normal;"></a>
+                </div>
+            </div>
+            <iframe src="./0.html" frameborder="0" width="100%" height="700px"></iframe>
+        </div>
+    </div>
+    </div>
+    <div id="ft" class="wp cl">
+        <div id="flk" class="y">
+            <p>
+                <a href="./0.html" target="_blank">郭 子墨</a>
+                <span class="pipe">|</span>
+                <a href="./刘睿涵.html">劉睿涵</a>
+                <span class="pipe">|</span>
+                <strong>
+                    <a href="https://www.itsacg.qzz.io/">首页</a>
+                </strong>
+                <span class="pipe">|</span>
+                <strong>
+                    <a href="https://www.91vip.qzz.io">91VIP</a>
+                </strong>
+            </p>
+        </div>
+        <div id="frt">
+            <p class="xs0">© 2001-2025 <a href="https://code.dismall.com/" target="_blank">Discuz! Team</a>.</p>
+        </div>
+    </div>
+
+    <div id="scrolltop" style="left: 1472px; visibility: visible;">
+        <span hidefocus="true"><a title="返回頂部" onclick="window.scrollTo(&#39;0&#39;,&#39;0&#39;)"
+                class="scrolltopa"><b>返回頂部</b></a></span>
+    </div>
+    <script
+        type="text/javascript">_attachEvent(window, 'scroll', function () { showTopLink(); }); checkBlind();</script>
+
+
 </body>
 
 </html>

@@ -1,0 +1,38 @@
+.dotting {
+    display:inline-block;
+    min-width:5px;
+    min-height:5px;
+    box-shadow:5px 0 currentColor,18px 0 currentColor,32px 0 currentColor;
+    -webkit-animation:dot 2s infinite step-start both;
+    animation:dot 2s infinite step-start both;
+    *zoom:expression(this.innerHTML = '...');
+    /* IE7 */
+}
+:root .dotting {
+    margin-right:20px
+}
+/* IE9+,FF,CH,OP,SF */
+
+@-webkit-keyframes dot {
+    25% {
+        box-shadow:none
+    }
+    50% {
+        box-shadow:5px 0 currentColor
+    }
+    75% {
+        box-shadow:5px 0 currentColor,18px 0 currentColor
+    }
+
+}
+@keyframes dot {
+    25% {
+        box-shadow:none
+    }
+    50% {
+        box-shadow:5px 0 currentColor
+    }
+    75% {
+        box-shadow:5px 0 currentColor,18px 0 currentColor
+    }
+}
