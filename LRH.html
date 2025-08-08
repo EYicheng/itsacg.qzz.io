@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>刘睿涵的暗影猎跑 | 猎奇约跑体验</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap');
+
+        :root {
+            --blood-red: #e63946;
+            --neon-purple: #b709c5;
+            --toxic-green: #70e000;
+            --deep-purple: #3d348b;
+            --vintage-yellow: #e9c46a;
+            --obsidian: #0b090a;
+            --crimson: #660708;
+            --asphalt: #242423;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans SC', sans-serif;
+            background: linear-gradient(135deg, var(--obsidian) 0%, var(--asphalt) 50%, var(--crimson) 100%);
+            color: #f5f5f5;
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            padding-bottom: 4rem;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(179, 9, 197, 0.15) 0%, transparent 25%),
+                radial-gradient(circle at 80% 70%, rgba(230, 57, 70, 0.15) 0%, transparent 25%);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .crt-effect::after {
+            content: " ";
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 3px;
+            z-index: 99;
+            pointer-events: none;
+        }
+
+        .glitch-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes static {
+            0% {
+                background-position: 0% 0%;
+            }
+
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+
+        .header {
+            position: relative;
+            text-align: center;
+            padding: 4rem 0 2rem;
+            background: linear-gradient(to bottom, rgba(11, 9, 10, 0.95) 0%, transparent 100%);
+            margin-bottom: 2rem;
+            border-bottom: 3px solid var(--blood-red);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.7);
+            background-image:
+                radial-gradient(ellipse at top, rgba(179, 9, 197, 0.1) 0%, transparent 70%),
+                radial-gradient(ellipse at bottom, rgba(230, 57, 70, 0.1) 0%, transparent 70%);
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 5px solid var(--blood-red);
+            object-fit: cover;
+            margin: 0 auto;
+            display: block;
+            filter: grayscale(30%) sepia(40%) contrast(120%);
+            box-shadow: 0 0 30px var(--neon-purple);
+            position: relative;
+            z-index: 2;
+        }
+
+        .profile-img::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, transparent 70%, var(--toxic-green) 150%);
+            border-radius: 50%;
+            animation: pulsate 2s infinite;
+        }
+
+        @keyframes pulsate {
+            0% {
+                opacity: 0.5;
+                transform: scale(0.95);
+            }
+
+            50% {
+                opacity: 0.8;
+                transform: scale(1.05);
+            }
+
+            100% {
+                opacity: 0.5;
+                transform: scale(0.95);
+            }
+        }
+
+        .title {
+            font-family: 'Cinzel', serif;
+            font-size: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin: 1.5rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .glitch {
+            color: var(--vintage-yellow);
+            position: relative;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .glitch::before {
+            left: 3px;
+            text-shadow: -4px 0 var(--toxic-green);
+            clip: rect(24px, 550px, 90px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        .glitch::after {
+            left: -3px;
+            text-shadow: -4px 0 var(--neon-purple);
+            clip: rect(85px, 550px, 140px, 0);
+            animation: glitch-anim 6s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% {
+                clip: rect(42px, 9999px, 44px, 0);
+            }
+
+            10% {
+                clip: rect(12px, 9999px, 59px, 0);
+            }
+
+            20% {
+                clip: rect(48px, 9999px, 29px, 0);
+            }
+
+            30% {
+                clip: rect(42px, 9999px, 73px, 0);
+            }
+
+            40% {
+                clip: rect(63px, 9999px, 27px, 0);
+            }
+
+            50% {
+                clip: rect(34px, 9999px, 55px, 0);
+            }
+
+            60% {
+                clip: rect(65px, 9999px, 73px, 0);
+            }
+
+            70% {
+                clip: rect(26px, 9999px, 55px, 0);
+            }
+
+            80% {
+                clip: rect(65px, 9999px, 29px, 0);
+            }
+
+            90% {
+                clip: rect(82px, 9999px, 70px, 0);
+            }
+
+            100% {
+                clip: rect(40px, 9999px, 77px, 0);
+            }
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            color: var(--toxic-green);
+            text-shadow: 0 0 10px var(--toxic-green);
+            margin-bottom: 1rem;
+            letter-spacing: 3px;
+            font-weight: 700;
+        }
+
+        .tagline::after {
+            content: "▮";
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            50% {
+                opacity: 0;
+            }
+        }
+
+        .running-path {
+            height: 6px;
+            background: linear-gradient(90deg,
+                    transparent 0%,
+                    var(--neon-purple) 20%,
+                    var(--toxic-green) 40%,
+                    var(--blood-red) 60%,
+                    var(--neon-purple) 80%,
+                    transparent 100%);
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            right: 0;
+            filter: blur(4px);
+        }
+
+        .content-box {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(11, 9, 10, 0.85);
+            border: 1px solid rgba(179, 9, 197, 0.4);
+            border-radius: 10px;
+            position: relative;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .content-box::before {
+            content: "";
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            border-radius: 10px;
+            background: linear-gradient(45deg,
+                    var(--blood-red),
+                    var(--neon-purple),
+                    var(--toxic-green),
+                    var(--neon-purple),
+                    var(--blood-red));
+            z-index: -1;
+        }
+
+        .content-box::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(0deg,
+                    rgba(0, 0, 0, 0.15),
+                    rgba(0, 0, 0, 0.15) 1px,
+                    transparent 1px,
+                    transparent 4px);
+            pointer-events: none;
+            border-radius: 10px;
+        }
+
+        h1,
+        h2 {
+            font-family: 'Cinzel', serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            color: var(--vintage-yellow);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            border-bottom: 2px solid var(--blood-red);
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: var(--toxic-green);
+            border-bottom: 1px dashed rgba(179, 9, 197, 0.6);
+        }
+
+        p {
+            margin-bottom: 1.2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .quote {
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--toxic-green);
+            background: rgba(13, 13, 15, 0.5);
+            position: relative;
+            font-style: italic;
+            color: var(--vintage-yellow);
+        }
+
+        .quote::before {
+            content: "" ";
+ position: absolute;
+            top: -20px;
+            left: 10px;
+            font-size: 5rem;
+            color: rgba(230, 57, 70, 0.3);
+        }
+
+        .audio-player {
+            background: rgba(13, 13, 15, 0.6);
+            border: 1px solid rgba(179, 9, 197, 0.4);
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .audio-player::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg,
+                    var(--neon-purple),
+                    var(--blood-red),
+                    var(--toxic-green));
+        }
+
+        .track-title {
+            font-weight: 700;
+            color: var(--toxic-green);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        audio {
+            width: 100%;
+            filter: sepia(40%) hue-rotate(30deg) saturate(130%);
+        }
+
+        .running-man {
+            position: fixed;
+            bottom: -30px;
+            left: 0;
+            font-size: 3rem;
+            animation: run 15s linear infinite;
+            z-index: 999;
+            text-shadow: 0 0 10px var(--toxic-green);
+        }
+
+        @keyframes run {
+            0% {
+                transform: translateX(-100px);
+            }
+
+            100% {
+                transform: translateX(100vw);
+            }
+        }
+
+        .hunt-button {
+            display: block;
+            background: linear-gradient(45deg, var(--blood-red), var(--neon-purple));
+            color: white;
+            font-family: 'Cinzel', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 1.5rem 2rem;
+            margin: 2rem auto;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s;
+            box-shadow: 0 0 25px rgba(179, 9, 197, 0.7);
+            max-width: 400px;
+            text-align: center;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 15px rgba(230, 57, 70, 0.7);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(179, 9, 197, 0.9);
+            }
+
+            100% {
+                box-shadow: 0 0 15px rgba(230, 57, 70, 0.7);
+            }
+        }
+
+        .hunt-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px rgba(179, 9, 197, 0.9);
+            animation: none;
+        }
+
+        .hunt-button::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .hunt-button:hover::before {
+            left: 100%;
+        }
+
+        .secret-msg {
+            position: fixed;
+            font-size: 0.9rem;
+            color: var(--toxic-green);
+            opacity: 0.7;
+            transform: rotate(-10deg);
+            z-index: 999;
+            text-shadow: 0 0 5px black;
+            pointer-events: none;
+            animation: float 6s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                opacity: 0;
+                transform: translateY(0) rotate(-10deg);
+            }
+
+            25% {
+                opacity: 0.8;
+            }
+
+            50% {
+                opacity: 0.8;
+                transform: translateY(-20px) rotate(-10deg);
+            }
+
+            75% {
+                opacity: 0.3;
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateY(-40px) rotate(-10deg);
+            }
+        }
+
+        .footer {
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            color: rgba(245, 245, 245, 0.7);
+            border-top: 1px solid rgba(179, 9, 197, 0.3);
+            position: relative;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--toxic-green);
+            text-decoration: none;
+            position: relative;
+            font-weight: 700;
+            padding: 0.5rem;
+        }
+
+        .footer-links a::after {
+            content: "";
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--toxic-green);
+            transition: width 0.3s;
+        }
+
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+
+            .content-box {
+                padding: 1.5rem;
+                margin: 1rem 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .hunt-button {
+                font-size: 1.2rem;
+                padding: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body class="crt-effect">
+    <!-- 随机生成的秘密信息 -->
+    <div class="secret-msg" style="top: 20%; left: 10%;">他在奔跑...你能追上吗？</div>
+    <div class="secret-msg" style="top: 35%; left: 75%;">猎奇氛围下相遇</div>
+    <div class="secret-msg" style="top: 65%; left: 15%;">黑暗中的追逐</div>
+
+    <!-- 跑步小人动画 -->
+    <div class="running-man" style="animation-delay: 0s;">🦹‍♂️</div>
+    <div class="running-man" style="animation-delay: 5s; animation-duration: 18s;">🏃‍♂️</div>
+
+    <div class="header glitch-container content-box">
+        <img src="./img/1901c526b7f556e49ec3788961695379.jpg" alt="刘睿涵" class="profile-img">
+        <h1 class="title"><span class="glitch" data-text="暗影猎跑——刘睿涵的约跑网站">暗影猎跑——刘睿涵的约跑网站</span></h1>
+        <p class="tagline">追逐·黑暗·心跳</p>
+        <p>我是<span
+                style="color: var(--toxic-green); font-weight: 700; text-shadow: 0 0 5px var(--toxic-green);">刘睿涵</span>
+            ｜ 大肾 ｜ 猎奇跑者</p>
+        <div class="running-path"></div>
+    </div>
+
+    <div class="content-box">
+        <h1>欢迎来到暗影追逐场</h1>
+        <p>在这光影交错的数字空间里，我将带你体验心跳加速的猎奇之旅。</p>
+        <p>这里不是普通的跑步邀约，而是穿越黑暗、追逐心跳的感官冒险。</p>
+
+        <div class="quote">
+            "帅吗？帅也不是你的，我是赵德轩的。我要舌吻赵德轩"
+        </div>
+
+        <h2>向前跑...超越极限</h2>
+
+        <div class="audio-player">
+            <p class="track-title">睿涵哥哥的甜美嗓音</p>
+            <audio controls>
+                <source src="./audio/睿涵哥哥的甜美嗓音.mp3" type="audio/mpeg">
+                您的浏览器不支持音频元素
+            </audio>
+            <p style="margin-top: 1rem; color: var(--toxic-green);">好久没打了😍😰</p>
+        </div>
+    </div>
+
+    <div class="content-box">
+        <h1>约跑邀请</h1>
+        <p>在北京一零一中温泉校区初一3班的领域里，我向你发出猎奇奔跑的邀请。</p>
+        <p>这不是普通的跑步邀约，而是暗夜中的追逐游戏：</p>
+
+        <ul style="margin-left: 2rem; margin-bottom: 1.5rem;">
+            <li>月夜幽径下的狂奔追逐</li>
+            <li>城市丛林里的躲猫猫游戏</li>
+            <li>心跳同步的双人极限奔跑</li>
+            <li>感官过载的猎奇赛道</li>
+        </ul>
+
+        <p>在黑暗掩护下，我们创造属于猎奇者的心跳时刻。</p>
+
+        <div class="audio-player">
+            <p class="track-title">全民一起打飞机</p>
+            <audio controls>
+                <source src="./audio/zztdd.mp3" type="audio/mpeg">
+                您的浏览器不支持音频元素
+            </audio>
+            <div style="margin-top: 1rem; color: var(--toxic-green);">
+                <p>啦啦啦啦啦我们一起打飞机~</p>
+                <p>啦啦啦啦啦我们一起打飞机~</p>
+                <p>在我很小的时候我就喜欢打飞机~~</p>
+            </div>
+        </div>
+
+        <button class="hunt-button">加入猎跑游戏</button>
+    </div>
+
+    <!-- <div class="content-box">
+        <h1>猎奇体验馆</h1>
+        <p>探索感官的未知领域，激发内心深处的猎奇欲望：</p>
+
+        <h2>诡异音效馆</h2>
+        <div class="audio-player">
+            <p class="track-title">猎奇奔跑音效集</p>
+            <audio controls>
+                <source src="#" type="audio/mpeg">
+                您的浏览器不支持音频元素
+            </audio>
+        </div>
+
+        <h2>视觉扭曲镜</h2>
+        <p style="color: var(--toxic-green);">点击下方链接体验视觉迷踪</p>
+
+        <div style="display: flex; justify-content: center; margin: 2rem 0;">
+            <div
+                style="position: relative; width: 200px; height: 200px; overflow: hidden; border-radius: 10px; border: 2px solid var(--neon-purple);">
+                <div
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: conic-gradient(var(--neon-purple), var(--blood-red), var(--toxic-green), var(--vintage-yellow), var(--neon-purple)); animation: rotate 10s linear infinite; filter: blur(10px);">
+                </div>
+                <div
+                    style="position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px; background: rgba(11, 9, 10, 0.9); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-weight: 700; font-size: 1.2rem; color: var(--toxic-green);">视觉漩涡</span>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="footer">
+        <div class="footer-links">
+            <a href="http://www.itsacg.qzz.io/">访问主页</a>
+            <a href="http://www.91vip.qzz.io/">友情链接：91VIP</a>
+        </div>
+        <p style="margin-top: 1.5rem;">刘睿涵的暗影猎跑 | 北京一零一中温泉校区初一3班</p>
+    </div>
+
+    <script>
+        // 页面加载时增加猎奇效果
+        document.addEventListener('DOMContentLoaded', function () {
+            // 创建额外的秘密信息
+            function createSecretMessage() {
+                const texts = [
+                    "追逐心跳的感觉",
+                    "黑暗中的跑步者",
+                    "在猎奇中寻找自我",
+                    "你敢来挑战吗？",
+                    "跑步不止是运动",
+                    "与暗影一起奔跑"
+                ];
+
+                const msg = document.createElement('div');
+                msg.className = 'secret-msg';
+                msg.textContent = texts[Math.floor(Math.random() * texts.length)];
+
+                const topPos = Math.random() * 80 + 5;
+                const leftPos = Math.random() * 80 + 10;
+
+                msg.style.top = `${topPos}%`;
+                msg.style.left = `${leftPos}%`;
+
+                document.body.appendChild(msg);
+
+                // 移除消息后创建新消息
+                setTimeout(() => {
+                    msg.remove();
+                    createSecretMessage();
+                }, 6000);
+            }
+
+            // 启动秘密信息生成
+            for (let i = 0; i < 3; i++) {
+                setTimeout(createSecretMessage, i * 2000);
+            }
+
+            // 按钮点击效果
+            const huntButton = document.querySelector('.hunt-button');
+            if (huntButton) {
+                huntButton.addEventListener('click', function () {
+                    this.textContent = "寻找奔跑者位置...";
+                    this.style.background = 'linear-gradient(45deg, var(--toxic-green), var(--neon-purple))';
+
+                    setTimeout(() => {
+                        this.innerHTML = "目标锁定<span style='color: var(--toxic-green); font-size: 1.2em;'> █</span>";
+                        this.disabled = true;
+                    }, 1500);
+                });
+            }
+        });
+    </script>
+    <audio src="./audio/GALA - 追梦赤子心.mp3" autoplay loop controls></audio>
+</body>
+
+</html>
